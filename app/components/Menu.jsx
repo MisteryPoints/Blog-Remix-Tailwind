@@ -1,11 +1,23 @@
 import { Link } from "@remix-run/react"
+import { useState } from "react";
+import { ButtonP, Modal } from "~/components/shared"
+import AddCategoryForm from "~/routes/form/add-category-form"
+import AddPostForm from "~/routes/form/add-post-form";
+
 
 export function Menu() {
-  const addPost = () => {
-    console.log('Post Creado')
+  const [show, setShow] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const onOpenCloseModal = () => setShow((prevState) => !prevState)
+
+  const handlePost = () => {
+    setModalContent(<AddPostForm/>)
+    onOpenCloseModal()
   }
-  const addCategory = () => {
-    console.log('Categoría Creada')
+  const handleCategory = () => {
+    setModalContent(<AddCategoryForm/>)
+    onOpenCloseModal()
   }
   return (
     <>
@@ -14,10 +26,11 @@ export function Menu() {
           <h1 className="text-white text-2xl">Dev Blog</h1>
         </Link>
         <div className="grid grid-cols-1">
-          <button className="p-1 bg-black text-white rounded-lg mb-3" onClick={addPost}>Crear Post</button>
-          <button className="p-1 bg-black text-white rounded-lg" onClick={addCategory}>Crear Categoría</button>
+          <ButtonP className="mb-3 border-red-600 hover:bg-red-600" onClick={handlePost}>Crear Post</ButtonP>
+          <ButtonP onClick={handleCategory}>Crear Categoría</ButtonP>
         </div>
       </div>
+      <Modal show={show} close={onOpenCloseModal}>{modalContent}</Modal>
     </>
   )
 }

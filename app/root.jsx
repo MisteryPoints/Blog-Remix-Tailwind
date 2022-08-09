@@ -7,8 +7,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import styles from "./tailwind.css"
+import styless from "./styles.css"
 
-export const links = () => [{rel:'stylesheet', href:styles}]
+export const links = () => [{rel:'stylesheet', href:styles},{rel:'stylesheet', href:styless}]
 
 export const meta = () => ({
   charset: "utf-8",
