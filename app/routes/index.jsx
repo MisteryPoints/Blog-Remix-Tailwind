@@ -1,14 +1,20 @@
+import { useLoaderData } from "@remix-run/react";
 import Layout from "~/layouts/Layout";
+import { CategoryItem } from '~/components/blog'
+import { getCategory } from '~/api'
+import { map } from "lodash";
 
 export default function Index() {
+  const category = useLoaderData() 
   return (
-    <Layout className="bg-blue-900">
-      <h1 className=" text-orange-600 text-4xl">Welcome to Remix</h1> 
-      <div>
-        <h2 className=" text-blue-600 text-2xl">Welcome to my first page</h2>
-        <p className=" text-sm">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident aspernatur, voluptate amet molestias iste fugiat libero exercitationem error, ad accusamus eveniet neque beatae officiis hic atque repellat illo repellendus obcaecati.</p>
+    <Layout>
+      <div className="grid grid-cols-4 gap-4 mt-10">
+        {category.map( (cat, index) =>  <CategoryItem key={index} cat={cat}/> )}
       </div>
-
     </Layout>
   );
 }
+
+export const loader = () => {
+  return getCategory() 
+};

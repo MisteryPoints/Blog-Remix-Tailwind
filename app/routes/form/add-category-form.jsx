@@ -1,14 +1,20 @@
 import { Form } from "@remix-run/react"
 import { redirect } from "@remix-run/node"
 import { ButtonP, Input } from "~/components/shared"
+import { createCategory } from "~/api"
 
-export default function AddCategoryForm() {
+export default function AddCategoryForm({close}) {
+
+  const handleSubmit = () => {
+    close()
+  }
+
   return (
-    <Form method="POST" action="/form/add-category-form" className="flex flex-col">
-        <Input name="title" placeholder="Titulo" className='my-2 '/>
-        <Input name="slug" placeholder="Slug" className='my-2 '/>
+    <Form method="POST" action="/form/add-category-form" className="flex flex-col" onSubmit={handleSubmit}>
+        <Input name="title" placeholder="Titulo" className='border-white placeholder-shown:w-60 placeholder-shown:border-none w-full focus:w-full focus:shadow-blue-500 alltrans'/>
+        <Input name="slug" placeholder="Slug" className='border-white placeholder-shown:w-60 placeholder-shown:border-none w-full focus:w-full focus:shadow-blue-500 alltrans'/>
 
-        <ButtonP type='submit' className='mt-3'>
+        <ButtonP type='submit' className='border-black hover:bg-black mt-3'>
             Crear Categoría
         </ButtonP>
     </Form>
@@ -24,7 +30,7 @@ export async function action(props) {
         slug: formData.get('slug')
     }
 
-    console.log(data)
+    await createCategory(data) 
 
     return redirect('/')
 }
