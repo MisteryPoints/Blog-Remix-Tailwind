@@ -1,5 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import Layout from "~/layouts/Layout"
+import { getPost } from "~/api";
 
 export default function Category() {
     const {category} = useLoaderData()
@@ -14,6 +15,8 @@ export default function Category() {
 
 export const loader = async ({params}) => {
     const {category} = params 
+
+    const posts = await getPost(category)
     return {
         category
     }
