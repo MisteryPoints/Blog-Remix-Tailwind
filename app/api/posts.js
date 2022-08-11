@@ -19,7 +19,7 @@ ${content}
     await fs.writeFile(pathSaveFile, md)
 }
 
-export async function getPost(nameFolder) {
+export async function getPost(category) {
     const postPath = path.join(__dirname, '..', `db/posts/${category}`)
     const files = await fs.readdir(postPath)
 
@@ -27,6 +27,8 @@ export async function getPost(nameFolder) {
         files.map( async fileName => {
             const filePath = path.join(postPath, fileName)
             const file = await fs.readFile(filePath, 'utf-8')
+            const {attributes} = fm(file)
+            console.log(attributes)
         })
     )
 }

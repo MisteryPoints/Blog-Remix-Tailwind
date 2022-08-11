@@ -3,8 +3,7 @@ import Layout from "~/layouts/Layout"
 import { getPost } from "~/api";
 
 export default function Category() {
-    const {category} = useLoaderData()
-
+    const {category, posts} = useLoaderData()
 
     return (
         <Layout>
@@ -14,10 +13,12 @@ export default function Category() {
 }
 
 export const loader = async ({params}) => {
-    const {category} = params 
-
+    const {category} = params  
     const posts = await getPost(category)
+
+    console.log(posts)
     return {
-        category
+        category,
+        posts
     }
 };

@@ -1,8 +1,10 @@
 import path from "path"
 import fs from "fs/promises"
-import fm from 'front-matter'
+import fm from 'front-matter' 
+
 
 const categoriesPath = path.join(__dirname, '..', 'db/categories')
+
 
 export async function createCategory(data) {
     const postsPath = path.join(__dirname, '..', `db/posts/${data.slug}`)
@@ -15,6 +17,7 @@ slug: ${data.slug}
     await fs.writeFile(pathSaveFile, md)
     await fs.mkdir(postsPath)
 }
+
 
 export async function getCategory(){
     const files = await fs.readdir(categoriesPath)

@@ -17,4 +17,5 @@ export default function Index() {
 
 export const loader = () => {
   return getCategory() 
+  
 };
