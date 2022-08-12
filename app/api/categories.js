@@ -16,6 +16,7 @@ slug: ${data.slug}
     const pathSaveFile = path.join(categoriesPath, `${data.slug}.md`)
     await fs.writeFile(pathSaveFile, md)
     await fs.mkdir(postsPath)
+    
 }
 
 

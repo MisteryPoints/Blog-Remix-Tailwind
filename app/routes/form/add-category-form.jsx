@@ -1,8 +1,9 @@
 import { Form } from "@remix-run/react"
 import { redirect } from "@remix-run/node"
-import {unstable_createFileUploadHandler, unstable_parseMultipartFormData} from '@remix-run/node'
+import { unstable_createFileUploadHandler, unstable_parseMultipartFormData, unstable_createMemoryUploadHandler, unstable_composeUploadHandlers} from '@remix-run/node'
 import { ButtonP, Input } from "~/components/shared"
 import { createCategory } from "~/api"
+import path from "path"
 
 export default function AddCategoryForm({close}) {
 
@@ -24,34 +25,32 @@ export default function AddCategoryForm({close}) {
 }
 
 export async function action(props) {
-    const {request} = props
-    const formData = await request.formData()
-
-    const data = {
-        title: formData.get('title'),
-        slug: formData.get('slug')
-    }
-
+    const {request} = props 
+    const requests = await request.clone()
+    const formDatas = await requests.formData() 
+    const  data =  {
+      title: formDatas.get('title'),
+      slug: formDatas.get('slug')
+    }  
     const uploadHandler = unstable_createFileUploadHandler({
-      maxFileSize: 10_000_000,
-      directory: "public/uploads",
+      maxPartSize: 10_000_000,
+      directory: path.join(__dirname, '..', `public/uploads`),
       file: ({ filename }) => filename,
     })
-  
-    const formImageData = await unstable_parseMultipartFormData(
+    const formData = await unstable_parseMultipartFormData(
       request,
       uploadHandler
-    )
-  
-    const image = formImageData.get('image')
-  
-    if (file) {
+    ) 
+    const image = formData.get('image') 
+    
+    if (image) {
       console.log(`File uploaded to server/public/uploads/${image.name}`)
     } else {
       console.log("No file uploaded");
-    }
+    } 
 
+     
     await createCategory(data) 
-
+    
     return redirect('/')
 }
