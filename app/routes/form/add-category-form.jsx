@@ -35,7 +35,7 @@ export async function action(props) {
     const uploadHandler = unstable_createFileUploadHandler({
       maxPartSize: 10_000_000,
       directory: path.join(__dirname, '..', `public/uploads`),
-      file: ({ filename }) => filename,
+      file: ({ filename }) => `${data.slug}.${filename.split(".").pop()}`,
     })
     const formData = await unstable_parseMultipartFormData(
       request,

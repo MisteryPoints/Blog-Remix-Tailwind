@@ -13,7 +13,7 @@ export const links = () => [{rel:'stylesheet', href:styles},{rel:'stylesheet', h
 
 export const meta = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "DevPoint Blog Remix",
   viewport: "width=device-width,initial-scale=1",
 });
 

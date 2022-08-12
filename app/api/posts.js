@@ -9,11 +9,10 @@ export async function createPost(post, category) {
     const md = `---
 title: ${title}
 description: ${description}
-miniature: ${category}.png
+miniature: ${category}.jpg
 slug: ${slug}
----
-
-${content}
+text: ${content}
+--- 
 `
     const pathSaveFile = path.join(postPath, `${slug}.md`)
     await fs.writeFile(pathSaveFile, md)
@@ -28,7 +27,7 @@ export async function getPost(category) {
             const filePath = path.join(postPath, fileName)
             const file = await fs.readFile(filePath, 'utf-8')
             const {attributes} = fm(file)
-            console.log(attributes)
+            return attributes
         })
     )
 }
