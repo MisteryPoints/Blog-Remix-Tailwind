@@ -35,7 +35,7 @@ export async function action(props) {
     const uploadHandler = unstable_createFileUploadHandler({
       maxPartSize: 10_000_000,
       directory: path.join(__dirname, '..', `public/uploads`),
-      file: ({ filename }) => `${data.slug}.${filename.split(".").pop()}`,
+      file: ({ filename }) => `${data.slug}.png`, //Este codigo puede usarse en caso de que queramos tipo de file del archivo original, actualmente no interesa, porque solo implementamos png en los md ${filename.split(".").pop()}
     })
     const formData = await unstable_parseMultipartFormData(
       request,

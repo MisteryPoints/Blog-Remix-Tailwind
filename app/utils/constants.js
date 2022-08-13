@@ -1,0 +1,1 @@
+export const BASE_PATH = 'http://10.0.0.2:3000'

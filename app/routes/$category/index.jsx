@@ -1,7 +1,7 @@
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react"
 import Layout from "~/layouts/Layout"
-import { PostItem } from "~/components/blog"
-import { getPost } from "~/api";
+import { PostItem, NoPost } from "~/components/blog"
+import { getPost } from "~/api"
 
 export default function Category() {
     const {category, posts} = useLoaderData()
@@ -13,7 +13,7 @@ export default function Category() {
                     <PostItem key={index} post={post} category={category}/>
                 ))}
             </div>
-            {[...posts].length < 1 && (<p>No hay Posts</p>)}
+            {[...posts].length < 1 && (<NoPost/>)}
         </Layout>
     )
 }
@@ -26,4 +26,4 @@ export const loader = async ({params}) => {
         category,
         posts
     }
-};
+}

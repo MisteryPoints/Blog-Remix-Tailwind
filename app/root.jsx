@@ -8,8 +8,9 @@ import {
 } from "@remix-run/react";
 import styles from "./tailwind.css"
 import styless from "./styles.css"
+import prismstyles from 'prismjs/themes/prism-okaidia.min.css'
 
-export const links = () => [{rel:'stylesheet', href:styles},{rel:'stylesheet', href:styless}]
+export const links = () => [{rel:'stylesheet', href:styles},{rel:'stylesheet', href:styless}, {rel:'stylesheet', href:prismstyles}]
 
 export const meta = () => ({
   charset: "utf-8",

@@ -1,6 +1,7 @@
 import path from "path"
 import fs from "fs/promises"
 import fm from 'front-matter'
+import { marked } from "marked"
  
 export async function createPost(post, category) {
     const postPath = path.join(__dirname, '..', `db/posts/${category}`)
@@ -9,7 +10,7 @@ export async function createPost(post, category) {
     const md = `---
 title: ${title}
 description: ${description}
-miniature: ${category}.jpg
+miniature: ${category}.png
 slug: ${slug}
 text: ${content}
 --- 
@@ -30,4 +31,15 @@ export async function getPost(category) {
             return attributes
         })
     )
+}
+
+export async function getPosts(category, post){
+    const postPath = path.join(__dirname, '..', `db/posts/${category}/${post}.md`)
+    const file = await fs.readFile(postPath, 'utf-8')
+    const {attributes, body} = fm(file)
+
+    return {
+        attributes,
+        html : marked(body)
+    }
 }
