@@ -24,7 +24,7 @@ export function Menu() {
     <>
       <div className='bg-stone-800 flex items-center justify-between py-5 px-10'>
         <Link to='/'>
-          <h1 className="text-white text-2xl">Dev Blog</h1>
+          <h1 className="text-white text-2xl hover:text-gray-600">Dev Blog</h1>
         </Link>
         <div className="grid grid-cols-1">
           {category !== undefined ? ( 
